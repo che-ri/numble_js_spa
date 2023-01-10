@@ -4,6 +4,6 @@ export default class DetailPage {
   }
 
   render() {
-    this.dom.innerHtml = `<h1>상세페이지</h1>`;
+    this.dom.innerHTML = `<h1>상세페이지</h1>`;
   }
 }
