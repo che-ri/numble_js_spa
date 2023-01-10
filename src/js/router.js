@@ -29,7 +29,7 @@ export default class Router {
 
   render(url = this.pages.main.url) {
     const findPage = Object.values(this.pages).find((page) => page.url === url);
-    this.currentPage = findPage ?? this.pages.notFound.element;
+    this.currentPage = findPage ?? this.pages.notFound;
     this.currentPage.element.render();
   }
 }
