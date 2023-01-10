@@ -1,3 +1,14 @@
-import $ from "src/js/selector";
+import $ from "./selector.js";
+import Router from "./router.js";
 
-const $root = $("#root");
+export default function render() {
+  const $root = $("#root");
+
+  $root.innerHTML = `
+  <div id="router"></div>
+  `;
+
+  new Router($("#router")).render();
+}
+
+render();
