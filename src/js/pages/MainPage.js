@@ -1,4 +1,5 @@
 import Header from "../components/Header.js";
+import icon from "../icon.js";
 import Router from "../router.js";
 import $ from "../selector.js";
 
@@ -7,12 +8,35 @@ export default class MainPage {
     this.dom = dom;
   }
 
-  render() {
-    this.dom.innerHTML = `<div><div id="header"></div><h1>메인페이지</h1><button id="go-write-btn">디테일페이지 테스트</button><div>`;
-    new Header($("#header")).render();
-
+  init() {
     $("#go-write-btn").addEventListener("click", () => {
-      Router.instance.push("/detail/3");
+      Router.instance.push(Router.instance.pages.write.url);
     });
+  }
+
+  card() {
+    return `<div class="card">
+    <img class="card-img"/>
+    <div class="card-text-box">
+      <strong class="body1">신년 계획</strong>
+      <span class="body2 ellipsis">2022년 계획 세우셨나요?</span>
+    </div>
+    </div>`;
+  }
+
+  template() {
+    return `<div>
+      <div id="header"></div>
+        <button id="go-write-btn" class="btn main-btn">${
+          icon.write
+        }<span class="main-btn-text body1">새 글 작성하기</span></button>
+      <div class="main-list-container">${this.card()}</div>
+    </div>`;
+  }
+
+  render() {
+    this.dom.innerHTML = this.template();
+    new Header($("#header")).render();
+    this.init();
   }
 }
