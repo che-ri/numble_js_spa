@@ -1,3 +1,5 @@
+import "../css/style.css";
+
 import $ from "./selector.js";
 import Router from "./router.js";
 
