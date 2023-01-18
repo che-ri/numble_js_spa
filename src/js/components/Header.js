@@ -7,6 +7,19 @@ export default class Header {
     this.dom = dom;
   }
 
+  init() {
+    const $btn = $("#back-btn");
+    if ($btn)
+      $btn.addEventListener("click", () => {
+        Router.instance.back(Router.instance.pages.main.url);
+      });
+  }
+
+  template() {
+    return `<header class='header'>
+    ${this.backButton()} <span class="title">HAPPY 2023</span></header>`;
+  }
+
   backButton() {
     const isBackOn = window.location.pathname == Router.instance.pages.main.url ? false : true;
     /// 뒤로 이동할 페이지가 있다면 뒤로가기 버튼을 보여준다.
@@ -18,13 +31,7 @@ export default class Header {
   }
 
   render() {
-    this.dom.innerHTML = `<header class='header'>
-    ${this.backButton()} <span class="title">HAPPY 2023</span></header>`;
-
-    const $btn = $("#back-btn");
-    if ($btn)
-      $btn.addEventListener("click", () => {
-        Router.instance.back(Router.instance.pages.main.url);
-      });
+    this.dom.innerHTML = this.template();
+    this.init();
   }
 }
