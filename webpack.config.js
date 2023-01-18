@@ -8,13 +8,15 @@ module.exports = (_, argv) => {
   return {
     entry: { index: "./src/js/index.js" },
     output: {
-      filename: "bundle.js",
-      path: path.resolve(__dirname, "build"),
-      clean: true,
+      filename: "[name].bundle.js", //entry 기반으로 동적으로 생성
+      path: path.resolve(__dirname, "./build"),
+      clean: true, //사용하는 파일만 생성되도록 build 폴더 정리
+      publicPath: "/", //기본 경로
     },
     devServer: {
       port: 3000,
       hot: true,
+      historyApiFallback: true, //클라이언트단에서 url처리
     },
     // devtool: isDevelopment ? "eval-source-map" : "source-map",
     module: {
