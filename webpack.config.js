@@ -38,6 +38,10 @@ module.exports = (_, argv) => {
           exclude: /node_modules/,
           use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: "asset/resource",
+        },
       ],
     },
     plugins: [
