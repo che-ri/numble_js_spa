@@ -30,7 +30,7 @@ export default class MainPage {
       this.posts = response.data.data.posts;
       this.render();
       $("#go-write-btn").addEventListener("click", () => {
-        Router.instance.push(`/detail/3`);
+        Router.instance.push(`/write`);
       });
     } catch (e) {}
   };
