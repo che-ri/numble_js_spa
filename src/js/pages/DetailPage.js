@@ -32,8 +32,12 @@ export default class DetailPage {
     console.log("didUpdate");
   }
 
+  comment() {
+    return `<div class="comment-box"><p>다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!다들 올 한해 화이팅!</p><button class="btn sub-btn comment-control">삭제</button></div>`;
+  }
+
   template() {
-    return `<div><div id="header"></div><h1>상세페이지</h1><button id="go-home-btn">홈</button><div>`;
+    return `<div><div id="header"></div><img class="post-detail-img"/> <h1 class="post-detail-title">신년 계획</h1> <span class="post-detail-date">2023.01.10</span> <p class="post-detail-content">2023 계획을 세웠나요?? 2023 계획을 세웠나요??2023 계획을 세웠나요??2023 계획을 세웠나요??2023 계획을 세웠나요??2023 계획을 세웠나요??2023 계획을 세웠나요??2023 계획을 세웠나요??</p><div class="post-detail-controls"> <button class="btn sub-btn post-detail-control">수정</button><button class="btn sub-btn post-detail-control">삭제</button></div> <div class="comment-container"> ${this.comment()}  </div> <div class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></div> <div>`;
   }
 
   render() {
