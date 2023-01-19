@@ -8,7 +8,7 @@ export default function render() {
   $root.innerHTML = `
   <div id="router"></div>
   `;
-  new Router($("#router")).render();
+  new Router($("#router"));
 }
 
 render();
