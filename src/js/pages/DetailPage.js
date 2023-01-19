@@ -13,15 +13,12 @@ export default class DetailPage {
     console.log("init");
     this.dom.innerHTML = this.template();
     new Header($("#header"));
+    this.onReady();
   };
 
   onReady() {
     //dom이 업데이트된 이후
     console.log("ready");
-
-    $("#go-home-btn").addEventListener("click", () => {
-      Router.instance.push(`/`);
-    });
   }
 
   onWillUpdate() {
