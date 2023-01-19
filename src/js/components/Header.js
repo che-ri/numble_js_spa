@@ -5,9 +5,11 @@ import icon from "../../constants/icon.js";
 export default class Header {
   constructor(dom) {
     this.dom = dom;
+    this.init();
   }
 
   init() {
+    this.dom.innerHTML = this.template();
     const $btn = $("#back-btn");
     if ($btn)
       $btn.addEventListener("click", () => {
@@ -32,6 +34,5 @@ export default class Header {
 
   render() {
     this.dom.innerHTML = this.template();
-    this.init();
   }
 }
