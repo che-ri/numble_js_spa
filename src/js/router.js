@@ -60,10 +60,9 @@ export default class Router {
 
   render(url = "/") {
     const findPage = Object.values(this.pages).find((page) => url.match(page.regex));
-
-    this.current = { ...findPage, params: _getParams(findPage.url, url, findPage.regex) };
-
     const renderPage = findPage ?? this.pages.notFound;
+
+    this.current = { ...renderPage, params: _getParams(findPage.url, url, findPage.regex) };
 
     new renderPage.element(this.dom);
   }
