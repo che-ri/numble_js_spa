@@ -1,7 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const { ProvidePlugin } = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
+process;
 module.exports = (_, argv) => {
   const isDevelopment = argv.mode !== "production";
 
@@ -13,6 +16,13 @@ module.exports = (_, argv) => {
       clean: true, //사용하는 파일만 생성되도록 build 폴더 정리
       publicPath: "/", //기본 경로
     },
+
+    //이 또한, webpack5 nodejs polyfill 해결의 잔재...
+    // resolve: {
+    //   fallback: { path: require.resolve("path-browserify"), os: require.resolve("os-browserify/browser") },
+    //   extensions: [".js", ".ts"],
+    // },
+
     devServer: {
       port: 3000,
       hot: true,
@@ -47,6 +57,8 @@ module.exports = (_, argv) => {
     plugins: [
       new HtmlWebpackPlugin({ template: "./index.html" }),
       new MiniCssExtractPlugin({ filename: "./style.css" }),
+      // new ProvidePlugin({ process: "process/browser.js" }), // webpack5 nodejs polyfill 해결의 잔재..
+      new Dotenv(),
     ],
     performance: {
       // hints: isDevelopment ? "warning" : "error",
