@@ -1,4 +1,6 @@
 .post-detail-img {
+  width: 400px;
+  height: calc(400px / 1.2);
 }
 
 .post-detail-title {
