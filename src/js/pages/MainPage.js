@@ -9,24 +9,38 @@ export default class MainPage {
     this.dom = dom;
     this.posts = [];
     this.onInit();
+    this.onReady();
   }
 
-  onInit = async () => {
-    // dom 업데이트 전, init
+  onInit() {
+    // 최초 진입
+    console.log("init");
+    this.dom.innerHTML = this.template();
+    new Header($("#header"));
+  }
+
+  onReady = async () => {
+    //DOM 업데이트 이후
+    console.log("ready");
+
     try {
       const response = await api.getPosts();
 
       if (response.data.code !== 200) throw Error();
       this.posts = response.data.data.posts;
       this.render();
+      $("#go-write-btn").addEventListener("click", () => {
+        Router.instance.push(`/detail/3`);
+      });
     } catch (e) {}
   };
 
-  onReady() {
-    //dom이 업데이트된 이후
-    $("#go-write-btn").addEventListener("click", () => {
-      Router.instance.push(Router.instance.pages.write.url);
-    });
+  onWillUpdate() {
+    console.log("willUpdate");
+  }
+
+  onDidUpdate() {
+    console.log("didUpdate");
   }
 
   card(post) {
@@ -53,8 +67,9 @@ export default class MainPage {
   }
 
   render() {
+    this.onWillUpdate();
     this.dom.innerHTML = this.template();
-    new Header($("#header")).render();
-    this.onReady();
+    new Header($("#header"));
+    this.onDidUpdate();
   }
 }
