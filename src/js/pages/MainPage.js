@@ -1,7 +1,7 @@
 import Header from "../components/Header.js";
 import icon from "../../constants/icon.js";
 import Router from "../router.js";
-import $ from "../selector.js";
+import $, { $$ } from "../selector.js";
 import api from "../../api/index.js";
 
 export default class MainPage {
@@ -29,9 +29,17 @@ export default class MainPage {
       if (response.data.code !== 200) throw Error();
       this.posts = response.data.data.posts;
       this.render();
+
       $("#go-write-btn").addEventListener("click", () => {
         Router.instance.push(`/write`);
       });
+
+      $$(".card").forEach(($card) =>
+        $card.addEventListener("click", () => {
+          const postId = $card.dataset.id;
+          Router.instance.push(`/detail/${postId}`);
+        })
+      );
     } catch (e) {}
   };
 
@@ -44,7 +52,7 @@ export default class MainPage {
   }
 
   card(post) {
-    return `<div class="card">
+    return `<div class="card" data-id='${post.postId}'>
     <img class="card-img" loading="lazy" src="${post.image}"/>
     <div class="card-text-box">
       <strong class="body1">${post.title}</strong>
