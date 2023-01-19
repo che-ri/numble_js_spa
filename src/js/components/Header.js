@@ -1,6 +1,6 @@
 import Router from "../router.js";
 import $ from "../selector.js";
-import icon from "../icon.js";
+import icon from "../../constants/icon.js";
 
 export default class Header {
   constructor(dom) {

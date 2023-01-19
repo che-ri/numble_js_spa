@@ -5,6 +5,7 @@
 }
 
 .main-btn {
+  height: 60px;
   margin-top: 20px;
   background: bisque;
   display: flex;

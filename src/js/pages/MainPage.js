@@ -1,5 +1,5 @@
 import Header from "../components/Header.js";
-import icon from "../icon.js";
+import icon from "../../constants/icon.js";
 import Router from "../router.js";
 import $ from "../selector.js";
 
@@ -16,7 +16,7 @@ export default class MainPage {
 
   card() {
     return `<div class="card">
-    <img class="card-img"/>
+    <img class="card-img" loading="lazy"/>
     <div class="card-text-box">
       <strong class="body1">신년 계획</strong>
       <span class="body2 ellipsis">2022년 계획 세우셨나요?</span>
@@ -30,7 +30,7 @@ export default class MainPage {
         <button id="go-write-btn" class="btn main-btn">${
           icon.write
         }<span class="main-btn-text body1">새 글 작성하기</span></button>
-      <div class="main-list-container">${this.card()}</div>
+      <div class="cards-container"><div class="cards">${this.card()}</div></div>
     </div>`;
   }
 
