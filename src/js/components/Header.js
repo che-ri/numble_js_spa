@@ -5,16 +5,33 @@ import icon from "../../constants/icon.js";
 export default class Header {
   constructor(dom) {
     this.dom = dom;
-    this.init();
+    this.onInit();
   }
 
-  init() {
+  onInit() {
+    // 최초 진입
+    console.log("init");
     this.dom.innerHTML = this.template();
+    this.onReady();
+  }
+
+  onReady() {
+    //DOM 업데이트 이후
+    console.log("ready");
+
     const $btn = $("#back-btn");
     if ($btn)
       $btn.addEventListener("click", () => {
-        Router.instance.back(Router.instance.pages.main.url);
+        Router.instance.back();
       });
+  }
+
+  onWillUpdate() {
+    console.log("willUpdate");
+  }
+
+  onDidUpdate() {
+    console.log("didUpdate");
   }
 
   template() {
@@ -33,6 +50,8 @@ export default class Header {
   }
 
   render() {
+    this.onWillUpdate();
     this.dom.innerHTML = this.template();
+    this.onDidUpdate();
   }
 }
