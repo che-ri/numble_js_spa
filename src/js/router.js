@@ -7,6 +7,7 @@ import WritePage from "./pages/WritePage.js";
 export const pages = {
   detail: { url: "/detail/:id", element: DetailPage },
   write: { url: "/write", element: WritePage },
+  edit: { url: "/edit/:id", element: WritePage },
   notFound: { url: "/404", element: NotFoundPage },
   main: { url: "/", element: MainPage },
 };
