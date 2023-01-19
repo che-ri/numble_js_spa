@@ -22,8 +22,6 @@ export default class Router {
     this.pages = Object.entries(pages).reduce((acc, [key, value]) => {
       acc[key] = {
         ...value,
-        // url에 따라 보여줄 element 생성
-        element: new value.element(dom),
         // 정규식 추가
         regex: new RegExp(`^${value.url.replace(ROUTE_PARAMETER_REGEX, URL_FRAGMENT_REGEX).replace(/\//g, "\\/")}`),
       };
@@ -65,7 +63,8 @@ export default class Router {
     this.current = { ...findPage, params: _getParams(findPage.url, url, findPage.regex) };
 
     const renderPage = findPage ?? this.pages.notFound;
-    renderPage.element.render();
+
+    new renderPage.element(this.dom);
   }
 }
 
