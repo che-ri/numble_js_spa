@@ -6,6 +6,7 @@ export default class DetailPage {
   constructor(dom) {
     this.dom = dom;
     this.onInit();
+    this.onReady();
   }
 
   onInit = async () => {
@@ -13,7 +14,6 @@ export default class DetailPage {
     console.log("init");
     this.dom.innerHTML = this.template();
     new Header($("#header"));
-    this.onReady();
   };
 
   onReady() {

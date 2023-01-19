@@ -5,6 +5,7 @@ export default class WritePage {
   constructor(dom) {
     this.dom = dom;
     this.onInit();
+    this.onReady();
   }
 
   onInit() {
