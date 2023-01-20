@@ -1,7 +1,9 @@
 import api from "../../api/index.js";
 import Header from "../components/Header.js";
+import commentController from "../controller/commentController.js";
+import postController from "../controller/postController.js";
 import Router from "../router.js";
-import $ from "../selector.js";
+import $, { $$ } from "../selector.js";
 
 export default class DetailPage {
   constructor(dom) {
@@ -30,31 +32,79 @@ export default class DetailPage {
     console.log("ready");
 
     try {
-      const response = await api.getPost(this.postId);
-
-      if (response.data.data.success === false) throw Error();
-      this.post = response.data.data.post;
-      this.comments = response.data.data.comments;
-
-      console.log(this.post);
-      console.log(this.comments);
+      await this.getPost(this.postId);
       this.render();
+
+      //댓글 삭제 버튼
+      $$(".comment-delete-btn").forEach(($deleteBtn) =>
+        $deleteBtn.addEventListener("click", ($btn) => {
+          const commentId = $btn.target.dataset.commentId;
+          this.deleteComment(commentId);
+        })
+      );
+
+      //댓글 form
+      $("#comment-write-container").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const content = $(".comment-write-input").value;
+        this.writeComment(this.postId, content);
+      });
     } catch (e) {}
   };
 
   onWillUpdate() {
+    //리렌더링 이전
     console.log("willUpdate");
   }
 
   onDidUpdate() {
+    //리렌더링 된 이후 : 이벤트리스너 재설정
     console.log("didUpdate");
+
+    //댓글 삭제 버튼
+    $$(".comment-delete-btn").forEach(($deleteBtn) =>
+      $deleteBtn.addEventListener("click", ($btn) => {
+        const commentId = $btn.target.dataset.commentId;
+        this.deleteComment(commentId);
+      })
+    );
+
+    //댓글 form
+    $("#comment-write-container").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const content = $(".comment-write-input").value;
+      this.writeComment(this.postId, content);
+    });
   }
+
+  writeComment = async (postId, content) => {
+    await commentController.writeComment(postId, content);
+
+    await this.getPost(this.postId);
+    this.render();
+  };
+
+  deleteComment = async (postId, content) => {
+    await commentController.deleteComment(postId, content);
+    console.log("delete");
+    await this.getPost(this.postId);
+    this.render();
+  };
+
+  getPost = async (postId) => {
+    const data = await postController.getPost(postId);
+    if (data == undefined) return;
+    this.post = data.post;
+    this.comments = data.comments;
+  };
 
   commentBox(comment) {
     console.log(comment);
     return `<div class="comment-box"><p>${
       comment?.content ?? ""
-    }</p><button class="btn sub-btn comment-control">삭제</button></div>`;
+    }</p><button class="btn sub-btn comment-control comment-delete-btn" data-comment-id="${
+      comment.commentId
+    }" data-id="${comment.postId}">삭제</button></div>`;
   }
 
   template() {
@@ -67,7 +117,7 @@ export default class DetailPage {
     }</p><div class="post-detail-controls"> <button class="btn sub-btn post-detail-control">수정</button><button class="btn sub-btn post-detail-control">삭제</button></div> <div class="comment-container"> ${this.comments.reduce(
       (acc, cur) => (acc += this.commentBox(cur)),
       ""
-    )} </div> <div class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></div> <div>`;
+    )} </div> <form id="comment-write-container" class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></form> <div>`;
   }
 
   render() {

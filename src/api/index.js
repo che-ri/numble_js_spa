@@ -5,6 +5,6 @@ export default {
   getPost: (postId) => instance.get(`/post/${postId}`),
   updatePost: (postId, data) => instance.patch(`/post/${postId}`, data),
   deletePost: (postId) => instance.delete(`/post/${postId}`),
-  updateComment: (commentId) => instance.post(`/comment/${commentId}`),
+  writeComment: (postId, data) => instance.post(`/comment/${postId}`, data),
   deleteComment: (commentId) => instance.delete(`/comment/${commentId}`),
 };
