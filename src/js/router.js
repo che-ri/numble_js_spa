@@ -7,6 +7,7 @@ import WritePage from "./pages/WritePage.js";
 export const pages = {
   detail: { url: "/detail/:id", element: DetailPage },
   write: { url: "/write", element: WritePage },
+  edit: { url: "/edit/:id", element: WritePage },
   notFound: { url: "/404", element: NotFoundPage },
   main: { url: "/", element: MainPage },
 };
@@ -22,8 +23,6 @@ export default class Router {
     this.pages = Object.entries(pages).reduce((acc, [key, value]) => {
       acc[key] = {
         ...value,
-        // url에 따라 보여줄 element 생성
-        element: new value.element(dom),
         // 정규식 추가
         regex: new RegExp(`^${value.url.replace(ROUTE_PARAMETER_REGEX, URL_FRAGMENT_REGEX).replace(/\//g, "\\/")}`),
       };
@@ -61,11 +60,11 @@ export default class Router {
 
   render(url = "/") {
     const findPage = Object.values(this.pages).find((page) => url.match(page.regex));
-
-    this.current = { ...findPage, params: _getParams(findPage.url, url, findPage.regex) };
-
     const renderPage = findPage ?? this.pages.notFound;
-    renderPage.element.render();
+
+    this.current = { ...renderPage, params: _getParams(findPage.url, url, findPage.regex) };
+
+    new renderPage.element(this.dom);
   }
 }
 

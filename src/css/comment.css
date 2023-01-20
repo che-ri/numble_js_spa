@@ -1,0 +1,46 @@
+.comment-container {
+  padding: 10px 0;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comment-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-content {
+}
+
+.comment-control {
+}
+
+.comment-write-container {
+  padding: 10px;
+  background: #ededed;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 60px;
+}
+
+.comment-write-input {
+  width: 100%;
+  border: none;
+  background: #d2d2d2;
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
+.comment-write-btn {
+}

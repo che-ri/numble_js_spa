@@ -1,0 +1,26 @@
+.post-detail-img {
+  width: 100%;
+  height: calc(380px / 1.2);
+  object-fit: contain;
+}
+
+.post-detail-title {
+}
+
+.post-detail-date {
+}
+
+.post-detail-content {
+}
+
+.post-detail-controls {
+  margin-top: 30px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  border-bottom: 2px solid #d2d2d2;
+}
+
+.post-detail-control {
+}
