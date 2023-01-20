@@ -3,6 +3,7 @@
 # VanillaJS 로 신년메시지 주고받는 사이트를 SPA 로 만들기
 
 - 진행기간 : 2022-01-06 ~ 2022-01-19
+- 배포 url : http://numble-js-spa.s3-website-ap-southeast-2.amazonaws.com/
 
 <br/>
 
@@ -27,7 +28,7 @@
 
 <br/>
 
-## 디렉토리 구조 📂
+## 📂 디렉토리 구조 
 
 <details markdown="1">
 <summary>자세히 보기</summary>
