@@ -35,6 +35,16 @@ export default class DetailPage {
       await this.getPost(this.postId);
       this.render();
 
+      //게시글 수정 버튼
+      $("#post-edit-btn").addEventListener("click", () => {
+        Router.instance.push(`/edit/${this.postId}`);
+      });
+
+      //게시글 삭제 버튼
+      $("#post-delete-btn").addEventListener("click", () => {
+        this.deletePost(this.postId);
+      });
+
       //댓글 삭제 버튼
       $$(".comment-delete-btn").forEach(($deleteBtn) =>
         $deleteBtn.addEventListener("click", ($btn) => {
@@ -77,21 +87,28 @@ export default class DetailPage {
     });
   }
 
-  writeComment = async (postId, content) => {
-    await commentController.writeComment(postId, content);
+  deletePost = async (postId) => {
+    ///게시글 삭제 후 홈으로 이동
+    await postController.deletePost(postId);
+    Router.instance.replace("/");
+  };
 
+  writeComment = async (postId, content) => {
+    ///댓글 작성 후 데이터 갱신
+    await commentController.writeComment(postId, content);
     await this.getPost(this.postId);
     this.render();
   };
 
   deleteComment = async (postId, content) => {
+    ///댓글 삭제 후 데이터 갱신
     await commentController.deleteComment(postId, content);
-    console.log("delete");
     await this.getPost(this.postId);
     this.render();
   };
 
   getPost = async (postId) => {
+    ///게시글 불러온 후 데이터 갱신
     const data = await postController.getPost(postId);
     if (data == undefined) return;
     this.post = data.post;
@@ -114,7 +131,7 @@ export default class DetailPage {
       this.post?.createdAt ? new Date(this.post.createdAt).toDateString() : ""
     }</span> <p class="post-detail-content">${
       this.post?.content ?? ""
-    }</p><div class="post-detail-controls"> <button class="btn sub-btn post-detail-control">수정</button><button class="btn sub-btn post-detail-control">삭제</button></div> <div class="comment-container"> ${this.comments.reduce(
+    }</p><div class="post-detail-controls"> <button id="post-edit-btn" class="btn sub-btn post-detail-control">수정</button><button id="post-delete-btn" class="btn sub-btn post-detail-control">삭제</button></div> <div class="comment-container"> ${this.comments.reduce(
       (acc, cur) => (acc += this.commentBox(cur)),
       ""
     )} </div> <form id="comment-write-container" class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></form> <div>`;

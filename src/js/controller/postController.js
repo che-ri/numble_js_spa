@@ -10,4 +10,13 @@ export default {
       return response.data.data;
     } catch (e) {}
   },
+  deletePost: async (postId) => {
+    try {
+      const response = await api.deletePost(postId);
+
+      if (response.data.success === false) throw Error();
+
+      return response.data.data;
+    } catch (e) {}
+  },
 };
