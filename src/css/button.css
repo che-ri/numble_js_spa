@@ -6,6 +6,8 @@
 }
 
 .main-btn {
+  font-size: 15px;
+  font-weight: 500;
   height: 60px;
   margin-top: 20px;
   background: bisque;

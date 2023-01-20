@@ -125,7 +125,7 @@ export default class DetailPage {
   }
 
   template() {
-    return `<div><div id="header"></div><img class="post-detail-img" src="${
+    return `<div><div id="header"></div><div class="content"><img class="post-detail-img" src="${
       this.post?.image ?? ""
     }"/> <h1 class="post-detail-title">${this.post?.title ?? ""}</h1> <span class="post-detail-date">${
       this.post?.createdAt ? new Date(this.post.createdAt).toDateString() : ""
@@ -134,7 +134,7 @@ export default class DetailPage {
     }</p><div class="post-detail-controls"> <button id="post-edit-btn" class="btn sub-btn post-detail-control">수정</button><button id="post-delete-btn" class="btn sub-btn post-detail-control">삭제</button></div> <div class="comment-container"> ${this.comments.reduce(
       (acc, cur) => (acc += this.commentBox(cur)),
       ""
-    )} </div> <form id="comment-write-container" class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></form> <div>`;
+    )} </div> <form id="comment-write-container" class="comment-write-container"> <input class="comment-write-input"/> <button class="btn sub-btn comment-write-btn">작성</button></form></div></div>`;
   }
 
   render() {

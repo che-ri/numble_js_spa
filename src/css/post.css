@@ -1,6 +1,7 @@
 .post-detail-img {
-  width: 400px;
-  height: calc(400px / 1.2);
+  width: 100%;
+  height: calc(380px / 1.2);
+  object-fit: contain;
 }
 
 .post-detail-title {

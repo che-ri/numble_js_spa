@@ -1,11 +1,13 @@
 .write-img {
-  width: 400px;
-  height: calc(400px / 1.2);
+  width: 100%;
+  height: calc(380px / 1.2);
+  object-fit: contain;
 }
 
 .write-no-img {
-  width: 400px;
-  height: calc(400px / 1.2);
+  width: 100%;
+  height: calc(380px / 1.2);
+  object-fit: contain;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -88,7 +88,9 @@ export default class WritePage {
 
   template() {
     return `<div>
-      <div id="header"></div> ${this.imageBox()} 
+      <div id="header"></div>
+      <div class="content">
+      ${this.imageBox()} 
       <button id="img-input" class="btn main-btn">이미지 등록</button>
       <form id="write-form">
       <h3>제목</h3>
@@ -101,6 +103,7 @@ export default class WritePage {
       }</textarea>
       <button id="write-btn" class="btn main-btn">게시물 등록</button>
       </form
+      </div>
     </div>`;
   }
 
